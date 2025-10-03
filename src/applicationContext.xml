@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <context:property-placeholder location="classpath:zoo.properties"/>
+
+    <bean id="lion" class="Lion">
+        <constructor-arg index="0" value="Симба"/>
+        <constructor-arg index="1" value="5"/>
+    </bean>
+
+    <bean id="monkey" class="Monkey">
+        <constructor-arg name="favoriteFruit" value="бананы"/>
+        <constructor-arg name="isClimbing" value="true"/>
+    </bean>
+
+    <bean id="zooWithLion" class="Zoo">
+        <constructor-arg index="0" value="Центральный зоопарк"/>
+        <constructor-arg index="1" ref="lion"/>
+    </bean>
+
+    <bean id="zooWithMonkey" class="Zoo">
+        <constructor-arg index="0" value="Тропический парк"/>
+        <constructor-arg index="1" ref="monkey"/>
+    </bean>
+
+    <bean id="zooFromProperties" class="Zoo">
+        <property name="zooName" value="${zoo.name}"/>
+        <property name="animal" ref="monkey"/>
+    </bean>
+
+</beans>
